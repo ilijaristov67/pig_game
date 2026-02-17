@@ -12,3 +12,13 @@ let btnHold = document.querySelector('.btn--hold');
 score0El.textContent = '0';
 score1El.textContent = '0';
 diceEl.classList.add('hidden');
+
+//game-logic
+btnRoll.addEventListener('click', function(){
+  let dice = Math.trunc(Math.random()* 6) +1;
+
+  diceEl.classList.remove('hidden');
+
+  diceEl.src = `dice-${dice}.png`;
+
+});
