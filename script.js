@@ -13,14 +13,23 @@ let player0El = document.querySelector('.player--0');
 let player1El = document.querySelector('.player--1');
 
 //Starting conditions
-score0El.textContent = '0';
-score1El.textContent = '0';
-diceEl.classList.add('hidden');
-
-const scores = [0, 0]
-let currentScore = 0;
-let activePlayer = 0;
-let playing = true;
+let scores, currentScore, activePlayer, playing;
+const init = function () {
+   scores = [0, 0]
+   currentScore = 0;
+   activePlayer = 0;
+   playing = true;
+  score0El.textContent = '0';
+  score1El.textContent = '0';
+  currentScore0.textContent = '0';
+  currentScore1.textContent = '0';
+  diceEl.classList.add('hidden');
+  player0El.classList.remove('player--winner');
+  player1El.classList.remove('player--winner');
+  player1El.classList.remove('player--active');
+  player0El.classList.add('player--active');
+}
+init()
 
 //game-logic
 let switchPlayer = function () {
@@ -40,7 +49,6 @@ btnRoll.addEventListener('click', function(){
 
     diceEl.src = `dice-${dice}.png`;
 
-
     if(dice !== 1){
       currentScore += dice;
       document.getElementById(`current--${activePlayer}`).textContent = currentScore;
@@ -55,7 +63,7 @@ btnHold.addEventListener('click', function(){
     scores[activePlayer] += currentScore;
     document.getElementById(`score--${activePlayer}`).textContent = scores[activePlayer];
 
-    if (scores[activePlayer] >= 10){
+    if (scores[activePlayer] >= 100){
       playing = false;
       diceEl.classList.add('hidden');
       document.querySelector(`.player--${activePlayer}`).classList.add('player--winner');
@@ -67,13 +75,5 @@ btnHold.addEventListener('click', function(){
 });
 
 btnNew.addEventListener('click', function(){
-  playing = true;
-  score0El.textContent = '0';
-  score1El.textContent = '0';
-  currentScore0.textContent = '0';
-  currentScore1.textContent = '0';
-  player0El.classList.remove('player--winner');
-  player1El.classList.remove('player--winner');
-  player1El.classList.remove('player--active');
-  player0El.classList.add('player--active');
+  init()
 });
